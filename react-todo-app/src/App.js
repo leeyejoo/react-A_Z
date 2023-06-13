@@ -3,6 +3,9 @@ import { useState, useCallback } from "react";
 import Lists from "./components/Lists";
 import Form from "./components/Form";
 
+
+const initialTodoData = localStorage.getItem("todoData") ? JSON.parse(localStorage.getItem("todoData")) : [];
+
 export default function App() {
   /** state -> 데이터 변경 시 렌더링 해주기 위해서 React State 사용 
    *  value -> 입력한 데이터를 보관해주는 곳
@@ -30,7 +33,7 @@ export default function App() {
   //렌더링 확인 로그
   console.log('App Component Rendering');
 
-  const [todoData, setTodoData]  = useState([]);
+  const [todoData, setTodoData]  = useState(initialTodoData);
   const [value, setValue] = useState("");   // const [변수이름, state를 정하는 함수]
 
 
@@ -44,6 +47,9 @@ export default function App() {
       console.log('newTodoDate', newTodoData);
       //this.setState({ todoData: newTodoData })   // setState : 기존 데이터(todoData)를 새로운 데이터(newTodoData)로 변경
       setTodoData(newTodoData);
+
+      //localStorage에 저장
+      localStorage.setItem('todoData', JSON.stringify(newTodoData)); 
     },
     [todoData]
   );
@@ -66,12 +72,16 @@ export default function App() {
        ...this.state.todoData : 기존에 있던 todoData를 넣어줌 */
     //this.setState({todoData: [...todoData, newTodo], value:""})
     setTodoData((prev) => [...prev, newTodo]);   //함수를 이용하여 prev가 전 투두 데이터를 가져옴
+    localStorage.setItem('todoData', JSON.stringify([...todoData, newTodo])); 
+
+    // 입력란에 있던 글씨 지워줌 
     setValue("");
   }
 
   // delete All 버튼 클릭시 
   const handleRemoveClick = () => {
-    setTodoData([])
+    setTodoData([]); //할일 목록을 빈 배열로 만들어 줌
+    localStorage.setItem('todoData', JSON.stringify([])); 
   }
 
 
