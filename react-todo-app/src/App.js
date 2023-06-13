@@ -1,5 +1,5 @@
-import React, {useState} from "react";
 import "./App.css"
+import { useState, useCallback } from "react";
 import Lists from "./components/Lists";
 import Form from "./components/Form";
 
@@ -34,12 +34,18 @@ export default function App() {
   const [value, setValue] = useState("");   // const [변수이름, state를 정하는 함수]
 
 
-
-  const handleChange = (e) => {
-    console.log(e.target.value)
-    //this.setState({value: e.target.value})
-    setValue(e.target.value);
-  }
+  /* handleClick 함수는 List.js에서 사용하는 함수이지만 useCallback이라는 hook을 사용하기 위해서 최상위 컨포넌트로 옮김
+     useCallback : 함수를 재사용할 수 있도록 리렌더링을 막아주는 역할 
+  */
+  const handleClick = useCallback(
+    (id) => {
+      let newTodoData = todoData.filter((data) => data.id !== id);
+      console.log('newTodoDate', newTodoData);
+      //this.setState({ todoData: newTodoData })   // setState : 기존 데이터(todoData)를 새로운 데이터(newTodoData)로 변경
+      setTodoData(newTodoData);
+    },
+    [todoData]
+  );
 
   const handleSubmit = (e) => {
     // form 안에 input을 전송할 때 페이지 리로드 되는 것을 막아줌
@@ -69,7 +75,7 @@ export default function App() {
           <h1>할 일 목록</h1>
         </div>
 
-        <Lists todoData={todoData} setTodoData ={setTodoData}/>
+        <Lists todoData={todoData} setTodoData ={setTodoData} handleClick={handleClick}/>
         <Form handleSubmit={handleSubmit} value={value} setValue={setValue}/>
 
       </div>

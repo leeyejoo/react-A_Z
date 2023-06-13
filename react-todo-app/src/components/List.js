@@ -1,7 +1,7 @@
 import React from 'react'
 
 const List = React.memo(({
-    id, title, completed, todoData, setTodoData, provided, snapshot
+    id, title, completed, todoData, setTodoData, provided, snapshot, handleClick
 }) => {
 
     
@@ -22,12 +22,12 @@ const List = React.memo(({
         setTodoData(newTodoData);
     }
 
-    const handleClick = (id) => {
-        let newTodoData = todoData.filter((data) => data.id !== id);
-        console.log('newTodoDate', newTodoData);
-        //this.setState({ todoData: newTodoData })   // setState : 기존 데이터(todoData)를 새로운 데이터(newTodoData)로 변경
-        setTodoData(newTodoData);
-    };
+    // const handleClick = (id) => {
+    //     let newTodoData = todoData.filter((data) => data.id !== id);
+    //     console.log('newTodoDate', newTodoData);
+    //     //this.setState({ todoData: newTodoData })   // setState : 기존 데이터(todoData)를 새로운 데이터(newTodoData)로 변경
+    //     setTodoData(newTodoData);
+    // };
 
     return (
         <div 
