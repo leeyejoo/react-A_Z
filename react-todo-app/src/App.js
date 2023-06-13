@@ -27,6 +27,9 @@ export default function App() {
   //   ,value : ""
   // };
 
+  //렌더링 확인 로그
+  console.log('App Component Rendering');
+
   const [todoData, setTodoData]  = useState([]);
   const [value, setValue] = useState("");   // const [변수이름, state를 정하는 함수]
 

@@ -1,8 +1,15 @@
 import React from 'react'
 
-const List = ({
+const List = React.memo(({
     id, title, completed, todoData, setTodoData, provided, snapshot
 }) => {
+
+    
+    //렌더링 확인 로그
+    console.log('List Component Rendering');
+    /*React.memo로 감싸주기 전 -> 한 글자 입력시마다 props가 바뀌지 않아도 렌더링이 됨
+      React.memo로 감싸준 후 -> props가 바뀌지 않으면 렌더링이 되지 않음                      */
+
     const handleCompleteChange = (id) => {
         let newTodoData = todoData.map(data =>{
             if(data.id === id){
@@ -46,7 +53,7 @@ const List = ({
                 </button>
             </div>
         </div>
-    )
-}
+    );
+});
 
 export default List

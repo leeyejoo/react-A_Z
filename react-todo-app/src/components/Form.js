@@ -1,6 +1,10 @@
+import { DOM_KEY_LOCATION } from '@testing-library/user-event/dist/keyboard/types';
 import React from 'react'
 
 export default function Form({handleSubmit, value, setValue}) {
+
+  //렌더링 확인 로그
+  console.log('Form Component Rendering');
 
   const handleChange = (e) => {
     console.log(e.target.value)
