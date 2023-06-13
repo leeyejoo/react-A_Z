@@ -37,6 +37,7 @@ export default function App() {
   /* handleClick 함수는 List.js에서 사용하는 함수이지만 useCallback이라는 hook을 사용하기 위해서 최상위 컨포넌트로 옮김
      useCallback : 함수를 재사용할 수 있도록 리렌더링을 막아주는 역할 
   */
+  // X 버튼 클릭시 
   const handleClick = useCallback(
     (id) => {
       let newTodoData = todoData.filter((data) => data.id !== id);
@@ -46,7 +47,8 @@ export default function App() {
     },
     [todoData]
   );
-
+  
+  // 입력 버튼 클릭 시
   const handleSubmit = (e) => {
     // form 안에 input을 전송할 때 페이지 리로드 되는 것을 막아줌
     e.preventDefault();
@@ -67,12 +69,18 @@ export default function App() {
     setValue("");
   }
 
+  // delete All 버튼 클릭시 
+  const handleRemoveClick = () => {
+    setTodoData([])
+  }
+
 
   return(
     <div className="flex items-center justify-center w-screen h-screen bg-red-100">
       <div className="w-full p-6 m-4 bg-white rounded shadow-inner lg:max-w-lg">
         <div className="flex justify-between mb-3">
           <h1>할 일 목록</h1>
+          <button onClick={handleRemoveClick}> Delete All </button>
         </div>
 
         <Lists todoData={todoData} setTodoData ={setTodoData} handleClick={handleClick}/>
