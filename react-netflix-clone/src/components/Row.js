@@ -25,7 +25,14 @@ export default function Row({isLargeRow, title, id, fetchUrl}) {
       <div className='slider'>
 
         <div className='slider_arrow-left'>
-          <span className='arrow'>{"<"}</span> {/* 중괄호 없이 < 만 쓰면 태그와 구분할 수 없어 에러 발생 */}
+          <span 
+            className='arrow' 
+            onClick={()=>{
+              document.getElementById(id).scrollLeft -= window.innerWidth -80
+            }}
+          >
+            {"<"}
+          </span> {/* 중괄호 없이 < 만 쓰면 태그와 구분할 수 없어 에러 발생 */}
         </div>
 
         {/* 각 영화들  */}
@@ -42,7 +49,14 @@ export default function Row({isLargeRow, title, id, fetchUrl}) {
         </div>
 
         <div className='slider_arrow-right'>
-          <span className='arrow'>{">"}</span> {/* 중괄호 없이 > 만 쓰면 태그와 구분할 수 없어 에러 발생 */}
+          <span 
+            className='arrow'
+            onClick={()=>{
+              document.getElementById(id).scrollLeft += window.innerWidth -80
+            }}
+          >
+            {">"}
+          </span> {/* 중괄호 없이 > 만 쓰면 태그와 구분할 수 없어 에러 발생 */}
         </div>
 
       </div>
